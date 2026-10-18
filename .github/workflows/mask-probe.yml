@@ -1,0 +1,75 @@
+name: Mask Pixel Probe
+on:
+  push:
+    paths:
+      - .github/workflows/mask-probe.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: macos-26
+    timeout-minutes: 10
+    steps:
+      - name: Compare Quartz conversions
+        run: |
+          sudo xcode-select -s /Applications/Xcode_26.6.app
+          cat > /tmp/ventura-mask-probe.swift <<'SWIFT'
+          import Foundation
+          import CoreGraphics
+          
+          func sourceImage(_ pixels: [UInt8], width: Int, height: Int, padded: Bool) -> CGImage {
+              let stride = padded ? ((width + 15) / 16) * 16 : width
+              var data = [UInt8](repeating: 0, count: stride * height)
+              for y in 0..<height {
+                  for x in 0..<width { data[y * stride + x] = pixels[y * width + x] }
+              }
+              let provider = CGDataProvider(data: Data(data) as CFData)!
+              return CGImage(width: width, height: height, bitsPerComponent: 8, bitsPerPixel: 8,
+                  bytesPerRow: stride, space: CGColorSpaceCreateDeviceGray(),
+                  bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.none.rawValue),
+                  provider: provider, decode: nil, shouldInterpolate: false, intent: .defaultIntent)!
+          }
+          
+          func readImage(_ image: CGImage, width: Int, height: Int, flip: Bool, rowStride: Int) -> [UInt8] {
+              let context = CGContext(data: nil, width: width, height: height,
+                  bitsPerComponent: 8, bytesPerRow: rowStride, space: CGColorSpaceCreateDeviceGray(),
+                  bitmapInfo: CGImageAlphaInfo.none.rawValue)!
+              context.interpolationQuality = .none
+              context.setBlendMode(.copy)
+              if flip {
+                  context.translateBy(x: 0, y: CGFloat(height))
+                  context.scaleBy(x: 1, y: -1)
+              }
+              context.draw(image, in: CGRect(x: 0, y: 0, width: width, height: height))
+              context.flush()
+              let pointer = context.data!.assumingMemoryBound(to: UInt8.self)
+              return (0..<height).flatMap { y in
+                  (0..<width).map { x in pointer[(flip ? height - 1 - y : y) * context.bytesPerRow + x] }
+              }
+          }
+          
+          let cases: [[UInt8]] = [
+              [255, 0, 0, 0, 128, 0, 0, 0, 0, 0, 0, 64],
+              [0, 16, 32, 48, 64, 80, 96, 112, 128, 144, 192, 255],
+              [64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64],
+          ]
+          for pixels in cases {
+              for padded in [false, true] {
+                  let image = sourceImage(pixels, width: 3, height: 4, padded: padded)
+                  let original = image.dataProvider!.data! as Data
+                  print("INPUT", pixels, "padded", padded, "provider", Array(original))
+                  for flip in [false, true] {
+                      for stride in [0, 3, 16] {
+                          print("RESULT", "flip", flip, "stride", stride,
+                                readImage(image, width: 3, height: 4, flip: flip, rowStride: stride))
+                      }
+                  }
+              }
+          }
+          
+          SWIFT
+          swiftc -O /tmp/ventura-mask-probe.swift -o /tmp/ventura-mask-probe
+          /tmp/ventura-mask-probe
+          swiftc -Onone /tmp/ventura-mask-probe.swift -o /tmp/ventura-mask-probe-debug
+          /tmp/ventura-mask-probe-debug
