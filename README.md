@@ -1,41 +1,76 @@
-# Compositor 1.5.3 для macOS Ventura
+# Compositor for macOS Ventura
 
-Экспериментальная сборка актуального релиза для macOS 13.7.8 (22H730), Intel и Apple Silicon. Это не официальный релиз Compositor.
+[Русская версия](README.ru.md) · [Download](https://github.com/cortez777rus/Compositor-Ventura/releases/latest) · [Original Compositor](https://github.com/robbietilton/Compositor)
 
-Основа: [Compositor v1.5.3](https://github.com/robbietilton/Compositor/releases/tag/v1.5.3), коммит `554104cf1c2de844c1acbd60b4f7b422bd6ce7bd`.
+**An unofficial compatibility port of Compositor 1.5.3 for macOS 13 Ventura, for Intel and Apple Silicon.**
 
-## Исправленная сборка 49.2
+Compositor is the work of **Robbie Tilton and the upstream contributors**. Its original copyright is **© 2026 Wonder Assembly LLC**. Please visit and support the **[original repository: robbietilton/Compositor](https://github.com/robbietilton/Compositor)** and the [official website](https://robbietilton.com/compositor).
 
-Предыдущая сборка 49 падала при запуске на macOS 13.7.8: сравнение клавиш вызывало отсутствующую реализацию `KeyEquivalent: Equatable`. В 49.2 сравниваются символы клавиш, а сборка автоматически проверяет отсутствие этой зависимости в обеих архитектурах. Замените прежнюю копию приложения.
+This repository maintains the Ventura compatibility changes and build instructions. It does not claim authorship of Compositor and is not an official release or an endorsement by its original authors. The upstream [MIT license](LICENSE) and copyright notice are preserved.
 
-18 октября 2026 успешно завершён [запуск #8](https://github.com/cortez777rus/Compositor-Ventura/actions/runs/39140583803):
+## Download and install
 
-- 71 выбранный тест прошёл, ошибок нет (104 запуска с учётом параметров), включая все стандартные горячие клавиши.
-- Compositor 1.5.3, сборка **49.2**: Release для Intel (`x86_64`) и Apple Silicon (`arm64`).
-- Обе архитектуры прошли пробный запуск на macOS 26.6.2; Intel запускалась через Rosetta.
-- В скачанном архиве независимо проверено отсутствие проблемного импорта `KeyEquivalent`.
-- Основной исполняемый файл требует macOS 13.0; все 6 вложенных Mach-O файлов проверены для обеих архитектур.
-- Проверка `codesign --verify --deep --strict` прошла. Подпись ad-hoc, без нотариального заверения Apple.
-- SHA-256 архива приложения: `ca3d92e248d58631951999903dd28c462fa8f08b79a5e5b5b299686e7187de79`.
+Get **Compositor 1.5.3 — Ventura build 49.2** from [Releases](https://github.com/cortez777rus/Compositor-Ventura/releases/latest).
 
-Тесты выполнялись на macOS 26.6.2. Повторный запуск исправленной сборки на macOS 13.7.8 требует проверки на целевом Mac.
+1. Download **`Compositor-1.5.3-Ventura-universal.zip`** under **Assets**.
+2. Quit any older copy, unzip the download, and move `Compositor.app` to **Applications**, replacing the old copy if needed.
+3. Open the installed copy. This build is ad-hoc signed and **not notarized by Apple**. If macOS blocks it, use **System Settings → Privacy & Security → Open Anyway** for this app, if offered.
 
-## Повторная сборка
+The GitHub-generated **Source code** downloads contain this build kit. For the complete patched Xcode project, download the separately attached **`Compositor-1.5.3-Ventura-source.zip`**.
 
-Откройте **Actions → Ventura Build → Run workflow**. Сценарий получает зафиксированные исходники, применяет патч совместимости и собирает проект с Xcode 26.6 для минимальной macOS 13.0.
+No Xcode or GitHub account is needed to download and run the release. Keep the accompanying [third-party notices](THIRD_PARTY_NOTICES.txt) when redistributing it.
 
-После успешного запуска в артефакте **Compositor-1.5.3-Ventura-universal** появится ZIP с приложением и SHA-256. Журналы и результаты тестов находятся в **Ventura-build-diagnostics**.
+## Compatibility and verification
 
-Успешная сборка и тесты на сервере не заменяют проверку запуска на macOS 13.7.8.
+| Item | Status |
+| --- | --- |
+| Based on | Official Compositor **v1.5.3**, commit [`554104c`](https://github.com/robbietilton/Compositor/commit/554104cf1c2de844c1acbd60b4f7b422bd6ce7bd) |
+| App build | **49.2** |
+| Minimum deployment target | macOS **13.0** |
+| Architectures | Universal: **Intel x86_64 + Apple Silicon arm64** |
+| Ventura runtime report | Launch and initial use confirmed by the maintainer on **Intel, macOS 13.7.8 (22H730)** on 18 October 2026 |
+| Automated tests | **71 passed**, 0 failed; 104 cases including parameterized runs |
+| Release startup checks | Both slices passed on macOS 26.6.2; Intel ran through Rosetta |
+| Signing | Ad-hoc; no Developer ID certificate or Apple notarization |
 
-## Совместимость
+The Ventura report is an initial-use confirmation, not a complete feature or hardware certification. Native Apple Silicon on Ventura has not yet been reported as tested. Details: [test evidence](docs/TESTING.md).
 
-- Observation заменён на Combine; добавлена передача изменений вложенных редакторов и вкладок.
-- Новые API интерфейса заменены или защищены проверками версии macOS.
-- GPU-алгоритм Camera Raw 1.5.3 сохранён; блокировка кэша адаптирована для Ventura.
-- Для выделения объектов на Ventura используется DeepLabV3/Core ML и запасные алгоритмы. Качество может отличаться от оригинала.
-- Highlight Recovery при импорте RAW требует macOS 26 и на Ventura недоступен.
-- Официальное автоматическое обновление отключено, чтобы сохранить совместимость с Ventura.
-- Приложение подписывается локальной ad-hoc подписью, без нотариального заверения Apple.
+## Known differences
 
-Исходные лицензии MIT и уведомление о модели сохраняются в проекте и приложении. Формат документов не изменён.
+- Automatic subject/object selection and background removal use a Core ML/Vision fallback on Ventura. Their results can differ from the official version on newer macOS.
+- **RAW Highlight Recovery is unavailable on Ventura.** Other RAW support depends on the system's decoder.
+- Some interface details use older macOS controls.
+- Official automatic updates are disabled so they cannot replace this build with an incompatible release. Install future Ventura releases manually.
+- The document format has not been changed. Back up important projects before trying an unofficial build.
+
+Read [compatibility notes](docs/COMPATIBILITY.md) and the [changelog](CHANGELOG.md). The earlier internal build 49 had a startup crash; use **49.2**.
+
+## Source and builds
+
+This is a **patch-and-build repository**. It keeps a readable [compatibility patch](patches/ventura-1.5.3.patch), the original license, build scripts and documentation. It obtains the original application from the pinned upstream commit rather than presenting that application as a new project.
+
+To prepare the full source:
+
+```bash
+git clone https://github.com/cortez777rus/Compositor-Ventura.git
+cd Compositor-Ventura
+bash scripts/prepare-source.sh
+```
+
+The project appears in `build/Compositor`. To compile it, use **Xcode 26.6 on a supported newer macOS**, or run the existing GitHub Actions workflow in your own fork. You do not need to upgrade the Mac that will run the resulting app. See [building instructions](docs/BUILDING.md).
+
+## Credits and licenses
+
+- **Application:** [Robbie Tilton / Compositor and its contributors](https://github.com/robbietilton/Compositor); copyright Wonder Assembly LLC; [MIT](LICENSE).
+- **Ventura port maintenance and packaging:** [cortez777rus](https://github.com/cortez777rus). Port changes were prepared with AI assistance and tested as described above. This credit applies to the port, not authorship of the original application.
+- **Earlier compatibility work:** [vfxbro/Compositor legacy port](https://github.com/vfxbro/Compositor/tree/ca47ed15533786a1d83b08d016ccc952e8501518), used as a reference and for the foreground-selection fallback.
+- **Segmentation model:** Apple's distributed DeepLabV3Int8LUT model, with TensorFlow Models attribution and Apache 2.0 license retained.
+- **Bundled dependency:** [Sparkle 2.10.0](https://github.com/sparkle-project/Sparkle/tree/2.10.0), with its license and third-party notices retained. Its automatic-update path is disabled in this port.
+
+Full attribution: [CREDITS.md](CREDITS.md) · [THIRD_PARTY_NOTICES.txt](THIRD_PARTY_NOTICES.txt).
+
+## Report a problem or contribute
+
+Use [this repository's Issues](https://github.com/cortez777rus/Compositor-Ventura/issues) for Ventura-port problems. Include the app build, macOS version, CPU/GPU and steps to reproduce. Remove private paths and identifiers from crash reports before posting. Please do not send port-specific support requests to the upstream authors.
+
+English and Russian reports are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).

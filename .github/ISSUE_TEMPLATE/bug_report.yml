@@ -1,0 +1,43 @@
+name: Bug report / Ошибка
+description: Report a problem with the unofficial Ventura build / Сообщить об ошибке порта
+title: "[Ventura] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is the unofficial Ventura port. English and Russian are welcome.
+        Remove personal paths, identifiers and private documents from attachments.
+  - type: input
+    id: version
+    attributes:
+      label: App version and build / Версия и сборка
+      placeholder: "1.5.3 / 49.2"
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: macOS version / Версия macOS
+      placeholder: "13.7.8 (22H730)"
+    validations:
+      required: true
+  - type: input
+    id: hardware
+    attributes:
+      label: Mac, CPU and GPU / Модель Mac, CPU и GPU
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps, expected and actual result / Шаги, ожидаемый и фактический результат
+    validations:
+      required: true
+  - type: textarea
+    id: report
+    attributes:
+      label: Redacted crash excerpt or screenshot / Фрагмент отчёта без личных данных или скриншот
+  - type: textarea
+    id: origin
+    attributes:
+      label: Download source and additional context / Откуда скачана сборка и другие сведения
