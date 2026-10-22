@@ -12,6 +12,8 @@ This repository maintains the Ventura compatibility changes and build instructio
 
 The build kit now targets upstream **v1.5.5**, commit [`b31ea029`](https://github.com/robbietilton/Compositor/commit/b31ea029762ecb782699df971e1412168602a44d), as **Ventura candidate build 51.1**. This is a source update under validation, not a published working release. The latest published Ventura release remains **1.5.3 / 49.2** below. Its test results do not apply to 1.5.5.
 
+**CI passed:** 153 tests (201 executions), universal Release build and startup checks on macOS 26.6.2. Actual 1.5.5 runtime on macOS 13 has not been tested. [Evidence and candidate download](docs/TESTING.md).
+
 The port retains upstream RGB Split, the new adjustment layers, Channel Pack and Photoshop artboards, alongside the 1.5.4 changes. See the [migration review](docs/UPGRADING-1.5.5.md), [build instructions](docs/BUILDING.md) and [current verification status](docs/TESTING.md). **Native Apple Silicon runtime on macOS Ventura remains unconfirmed.**
 
 ## Published 1.5.3 release: download and install

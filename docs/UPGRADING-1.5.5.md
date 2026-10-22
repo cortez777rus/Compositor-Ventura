@@ -59,7 +59,7 @@ New `ChannelPack.swift`, `MetalDispersion.swift`, `LatinKeys.swift` and `FontLis
 
 On Linux, the new readable and embedded patches matched; the new patch applied to pristine pinned 1.5.5 without rejections; the prepared-source checks passed; the source-only script ran to completion using a local upstream mirror at the pinned tag. The local mirror avoids treating network or model availability as source validation. Script syntax, Python compilation and workflow YAML parsing were also checked.
 
-Linux has no Xcode, AppKit, Metal runtime or Ventura host. Compilation, test execution and binary checks require the Mac CI job. Runtime checks on Intel Ventura and separately native Apple Silicon Ventura remain required. Record actual CI evidence in [TESTING.md](TESTING.md); do not reuse the old 49.2 counts as a 1.5.5 result.
+Linux has no Xcode, AppKit, Metal runtime or Ventura host. The final [Mac CI run](https://github.com/cortez777rus/Compositor-Ventura/actions/runs/39869925687) passed 153 logical tests / 201 executions across twenty suites and built/validated both Release slices. Detailed evidence is in [TESTING.md](TESTING.md). Runtime checks on Intel Ventura and separately native Apple Silicon Ventura remain required; the old 49.2 results are not evidence for 1.5.5.
 
 ## Document compatibility
 
