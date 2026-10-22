@@ -1,6 +1,17 @@
 # Changelog
 
-Upstream application releases and Ventura packaging revisions are distinct. The application version remains **1.5.3**; **49.2** is this port's build number.
+Upstream application releases and Ventura packaging revisions are distinct. The current source candidate is **1.5.5 / 51.1**. The latest published release is **1.5.3 / 49.2**.
+
+## Unreleased — 1.5.5 / candidate 51.1
+
+- Rebase the Ventura patch onto upstream v1.5.5 commit `b31ea029762ecb782699df971e1412168602a44d`.
+- Retain RGB Split, Progressive Blur/Bloom/RGB Split adjustment layers, Channel Pack, PSD artboards and the intervening 1.5.4 improvements.
+- Resolve Xcode version/target, editor-state and export conflicts; keep the character-based shortcut crash fix alongside non-Latin layout support.
+- Convert the new PenInput state to Combine; publish line style/cap and artboard tab-name changes, with observation regression tests.
+- Keep the readable and embedded CI patches synchronized; validate clean patch application on Linux before Mac builds.
+- Expand selected Mac tests from eight to seventeen suites; continue checking both Release architectures, minimum OS, signing and startup on the build host.
+
+Validation status is tracked in [TESTING.md](docs/TESTING.md). This entry is not a release or a Ventura runtime compatibility claim. Native Apple Silicon on Ventura is unconfirmed.
 
 ## v1.5.3-ventura.2 — 2026-10-18
 

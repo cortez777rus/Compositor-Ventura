@@ -1,10 +1,10 @@
 # Compatibility notes
 
-Target: macOS 13.0 or later. Initial runtime confirmation: Intel, macOS 13.7.8 (22H730), build 49.2. This does not establish support for every Mac, GPU or editor feature.
+Target: macOS 13.0 or later, Intel and Apple Silicon. The current source candidate is 1.5.5 / 51.1; its build and runtime evidence is tracked separately in [TESTING.md](TESTING.md). The initial Intel macOS 13.7.8 (22H730) runtime confirmation applies only to the published 1.5.3 / 49.2 release. Native Apple Silicon on Ventura has not been confirmed for either version.
 
 ## Changes for Ventura
 
-- Observation-based state was replaced with Combine `ObservableObject`/`@Published`, including propagation of nested editor and tab changes.
+- Observation-based state was replaced with Combine `ObservableObject`/`@Published`, including propagation of nested editor and tab changes. The 1.5.5 port also converts PenInput and publishes new line-style/cap and artboard-name changes.
 - Newer SwiftUI/AppKit features were replaced or guarded by OS availability checks. Export preview uses an AppKit scroll view; older systems get compatible controls and cursors.
 - Camera Raw's cache uses an `NSLock` wrapper in place of `Synchronization.Mutex`; the upstream GPU adjustment algorithm is retained.
 - Foreground selection on macOS 13 uses DeepLabV3/Core ML plus Vision and deterministic fallbacks. The newer Vision implementation remains available on supported systems.
@@ -19,12 +19,12 @@ RAW Highlight Recovery requires a newer API and is unavailable on Ventura. Camer
 
 Some interface styling differs from the official app on new macOS. Automatic upstream updates are disabled. This app is ad-hoc signed and not notarized.
 
-The `.comp` document format was not changed by the port. Important projects should have backups, as with any experimental editor build.
+The port does not add its own `.comp` format changes. Upstream 1.5.5 adds optional fields for line styles and filter adjustment settings; documents using new features should not be assumed to reopen unchanged in 1.5.3. Important projects should have backups, as with any experimental editor build.
 
 ## Version labels
 
-- **1.5.3:** original application version.
-- **49.2:** repaired Ventura build number.
-- **v1.5.3-ventura.2:** public release tag for this port.
+- **1.5.5 / 51.1:** current upstream version / experimental Ventura build; not a published release.
+- **1.5.3 / 49.2:** previously verified upstream version / repaired Ventura build.
+- **v1.5.3-ventura.2:** latest published port release tag.
 
 Use this repository's Releases for later port updates. The original application's download and Homebrew package follow upstream requirements and may not run on Ventura.

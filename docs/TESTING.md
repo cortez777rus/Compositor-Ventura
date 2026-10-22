@@ -1,4 +1,24 @@
-# Verification of build 49.2
+# Verification status
+
+## 1.5.5 / candidate build 51.1
+
+This candidate is based on upstream commit `b31ea029762ecb782699df971e1412168602a44d`. Historical 1.5.3 / 49.2 results below do not validate it.
+
+| Check | Candidate status |
+| --- | --- |
+| Readable patch vs embedded payload SHA-256 | Passed locally on Linux |
+| Apply patch to pristine pinned 1.5.5 source | Passed locally, without rejected hunks |
+| Source-only preparation, pin and observation/target checks | Passed locally on Linux |
+| Xcode compilation and selected tests | Pending CI evidence |
+| Universal Release metadata, signature and build-host startup | Pending CI evidence |
+| Intel macOS Ventura launch and feature checks | Not performed for 1.5.5 |
+| Native Apple Silicon macOS Ventura | **Unconfirmed** |
+
+CI retains the previous eight suites and adds AdjustmentLayerTests, ChannelPackTests, FilterLayerTests, FilterTests, FontMenuFacesTests, PDFImportTests, PSDArtboardTests, PenPressureTests and ShapeToolTests. Two port regression tests check notifications for line style/cap and changing artboard tab names, including detaching closed tabs. No total pass count is claimed before the run.
+
+Before promoting the candidate, record the exact CI commit/run and repeat launch and feature checks on actual Ventura: create/paint/Undo/Redo, multiple tabs, save/reopen a `.comp` copy, RGB Split Linear/Radial and Split to Layers, all three new adjustment layers, PNG Channel Pack including RGB beneath alpha=0, PSD artboards and ordinary PSD import, PDF pages, font search, Russian-layout shortcuts and Save/Open panel clipboard operations. Check RAW and foreground selection for retained fallbacks. Pen UI and pressure additionally need a physical tablet. Record CPU/GPU and macOS version for each result.
+
+## Historical 1.5.3 / build 49.2
 
 ## Actual Ventura report
 

@@ -2,13 +2,19 @@
 
 [English](README.md) · [Скачать](https://github.com/cortez777rus/Compositor-Ventura/releases/latest) · [Оригинальный Compositor](https://github.com/robbietilton/Compositor)
 
-**Неофициальный порт Compositor 1.5.3 для macOS 13 Ventura — Intel и Apple Silicon.**
+**Неофициальный порт Compositor для macOS 13 Ventura с целевыми архитектурами Intel и Apple Silicon.**
 
 Compositor создан **Robbie Tilton и участниками оригинального проекта**. Исходные авторские права: **© 2026 Wonder Assembly LLC**. Основной проект находится здесь: **[robbietilton/Compositor](https://github.com/robbietilton/Compositor)**. Также доступен [официальный сайт](https://robbietilton.com/compositor).
 
 Этот репозиторий содержит адаптацию для Ventura и материалы для её сборки. Мы не присваиваем авторство программы. Это не официальный релиз и не проект, одобренный авторами оригинала. Исходная [MIT-лицензия](LICENSE) и уведомление об авторских правах сохранены.
 
-## Скачать и установить
+## Кандидат порта 1.5.5
+
+Набор для сборки теперь использует оригинальную **v1.5.5**, коммит [`b31ea029`](https://github.com/robbietilton/Compositor/commit/b31ea029762ecb782699df971e1412168602a44d), и номер экспериментальной сборки **51.1**. Это обновление исходников на проверке, а не опубликованный рабочий релиз. Последняя опубликованная версия для Ventura — **1.5.3 / 49.2**, описанная ниже. Её результаты тестирования не относятся к 1.5.5.
+
+Сохранён код новых RGB Split, корректирующих слоёв, Channel Pack, Photoshop artboards и изменений версии 1.5.4. См. [разбор переноса](docs/UPGRADING-1.5.5.md), [инструкцию сборки](docs/BUILDING.md) и [статус проверок](docs/TESTING.md). **Нативная работа на Apple Silicon с macOS Ventura пока не подтверждена.**
+
+## Опубликованная 1.5.3: скачать и установить
 
 Откройте [Releases](https://github.com/cortez777rus/Compositor-Ventura/releases/latest) и скачайте **Compositor 1.5.3 — сборка 49.2 для Ventura**.
 
@@ -20,7 +26,7 @@ Xcode и учётная запись GitHub для скачивания и за�
 
 При дальнейшем распространении сохраняйте [уведомления о лицензиях](THIRD_PARTY_NOTICES.txt).
 
-## Что проверено
+## Что проверено в опубликованной 1.5.3
 
 | Параметр | Состояние |
 | --- | --- |
@@ -46,7 +52,7 @@ Xcode и учётная запись GitHub для скачивания и за�
 
 ## Исходники и самостоятельная сборка
 
-Репозиторий хранит [читаемый патч](patches/ventura-1.5.3.patch) к оригинальному проекту и сценарии сборки. Полные исходники можно получить так:
+Репозиторий хранит [читаемый патч](patches/ventura-1.5.5.patch) к оригинальному проекту и сценарии сборки. Полные исходники можно получить так:
 
 ```bash
 git clone https://github.com/cortez777rus/Compositor-Ventura.git
