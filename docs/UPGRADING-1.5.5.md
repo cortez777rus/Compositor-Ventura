@@ -51,7 +51,7 @@ New `ChannelPack.swift`, `MetalDispersion.swift`, `LatinKeys.swift` and `FontLis
 - Add `--source-only` preparation for review without downloading the model; retain model URL and verified SHA-256 in the normal build path.
 - Validate clean patch application on Linux before the Mac job. The source checker verifies the source pin, CI pin agreement, patch reversibility, version/build/target settings, universal architecture setting, disabled upstream feed and absence of Observation declarations/imports and conflict markers in app Swift files.
 - Trigger validation/build on PRs and pushes affecting workflow, patches or scripts. Keep publication manual and label uploaded artifacts as candidates.
-- Expand selected tests from eight to **seventeen suites**, covering new filters/adjustments, Channel Pack transparency, PSD artboards, PDF, pen pressure, font faces and line styles.
+- Expand selected tests from eight to **twenty suites**, covering new filters/adjustments, Channel Pack transparency, PSD artboards, PDF, pen pressure, font faces, line styles, project persistence, viewport behavior and live floating-panel layout.
 - Add regression tests for line style/cap UI notifications and artboard tab-name notifications, including disconnection of closed tabs.
 - Retain segmentation/model-orientation tests, Camera Raw locking, binary minimum-OS and shortcut-conformance checks, ad-hoc signature verification and startup checks for both runnable Release slices.
 
@@ -63,4 +63,4 @@ Linux has no Xcode, AppKit, Metal runtime or Ventura host. Compilation, test exe
 
 ## Document compatibility
 
-The port adds no separate file-format changes. Upstream 1.5.5 adds optional persisted line styles and filter-layer settings; retain those upstream fields and their defaults. Back up files and test save/reopen using the new features. A document edited with them should not be assumed to look the same when opened in 1.5.3.
+The port adds no separate file-format changes. Upstream advances `ProjectManifest.current` from **14 to 16**: version 15 adds line style/cap metadata, and version 16 adds the three new filter adjustment kinds/settings. New saves use version 16, which the old 1.5.3 reader rejects, even if the document does not use those new features. The 1.5.5 reader accepts versions 1–16. Keep the original 1.5.3 project as a separate backup before saving a copy in 1.5.5; retain upstream validation and defaults. FilterLayerTests and ShapeToolTests exercise the new format gates; ProjectTests additionally covers general project validation and persistence.

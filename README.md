@@ -47,7 +47,7 @@ The Ventura report is an initial-use confirmation, not a complete feature or har
 - **RAW Highlight Recovery is unavailable on Ventura.** Other RAW support depends on the system's decoder.
 - Some interface details use older macOS controls.
 - Official automatic updates are disabled so they cannot replace this build with an incompatible release. Install future Ventura releases manually.
-- The document format has not been changed. Back up important projects before trying an unofficial build.
+- Upstream 1.5.5 saves `.comp` format 16, which 1.5.3 cannot open. The port preserves that behavior; keep original projects separately and test using copies.
 
 Read [compatibility notes](docs/COMPATIBILITY.md) and the [changelog](CHANGELOG.md). The earlier internal build 49 had a startup crash; use **49.2**.
 
@@ -60,6 +60,7 @@ To prepare the full source:
 ```bash
 git clone https://github.com/cortez777rus/Compositor-Ventura.git
 cd Compositor-Ventura
+git switch update/compositor-1.5.5-ventura
 bash scripts/prepare-source.sh
 ```
 

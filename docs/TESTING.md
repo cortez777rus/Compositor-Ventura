@@ -14,17 +14,17 @@ This candidate is based on upstream commit `b31ea029762ecb782699df971e1412168602
 | Intel macOS Ventura launch and feature checks | Not performed for 1.5.5 |
 | Native Apple Silicon macOS Ventura | **Unconfirmed** |
 
-CI retains the previous eight suites and adds AdjustmentLayerTests, ChannelPackTests, FilterLayerTests, FilterTests, FontMenuFacesTests, PDFImportTests, PSDArtboardTests, PenPressureTests and ShapeToolTests. Two port regression tests check notifications for line style/cap and changing artboard tab names, including detaching closed tabs. No total pass count is claimed before the run.
+CI retains the previous eight suites and adds AdjustmentLayerTests, ChannelPackTests, FilterLayerTests, FilterTests, FontMenuFacesTests, PDFImportTests, PSDArtboardTests, PenPressureTests, ShapeToolTests, ProjectTests, CompositorTests and FloatingPanelTests. Two port regression tests check notifications for line style/cap and changing artboard tab names, including detaching closed tabs. No total pass count is claimed before the run.
 
 Before promoting the candidate, record the exact CI commit/run and repeat launch and feature checks on actual Ventura: create/paint/Undo/Redo, multiple tabs, save/reopen a `.comp` copy, RGB Split Linear/Radial and Split to Layers, all three new adjustment layers, PNG Channel Pack including RGB beneath alpha=0, PSD artboards and ordinary PSD import, PDF pages, font search, Russian-layout shortcuts and Save/Open panel clipboard operations. Check RAW and foreground selection for retained fallbacks. Pen UI and pressure additionally need a physical tablet. Record CPU/GPU and macOS version for each result.
 
 ## Historical 1.5.3 / build 49.2
 
-## Actual Ventura report
+### Actual Ventura report
 
 On **18 October 2026**, the maintainer confirmed that build **49.2 opened and worked on Intel macOS 13.7.8 (22H730)** after the startup fix. This is a report of successful launch and initial use, not an exhaustive feature test. Native Apple Silicon on Ventura has not yet been confirmed.
 
-## Automated evidence
+### Automated evidence
 
 The published binary comes from [successful build #8](https://github.com/cortez777rus/Compositor-Ventura/actions/runs/39140583803), workflow commit `25eeefc0f8eba9b08107a652faf1da5c8fa278d9`.
 
@@ -46,7 +46,7 @@ ca3d92e248d58631951999903dd28c462fa8f08b79a5e5b5b299686e7187de79
 
 The full source release asset includes build-time logs and validation reports. Those reports predate the later Ventura confirmation above. GitHub Actions diagnostics have limited retention; the release source archive keeps the text evidence.
 
-## Useful further checks
+### Useful further checks
 
 Reports of native Apple Silicon on Ventura and additional Intel/GPU configurations are welcome. Useful workflows include creating a canvas, painting, Undo/Redo, multiple tabs, saving/reopening a copy of a `.comp` document, PNG/JPEG export, Camera Raw and automatic selections.
 

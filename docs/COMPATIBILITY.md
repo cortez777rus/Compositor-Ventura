@@ -19,7 +19,7 @@ RAW Highlight Recovery requires a newer API and is unavailable on Ventura. Camer
 
 Some interface styling differs from the official app on new macOS. Automatic upstream updates are disabled. This app is ad-hoc signed and not notarized.
 
-The port does not add its own `.comp` format changes. Upstream 1.5.5 adds optional fields for line styles and filter adjustment settings; documents using new features should not be assumed to reopen unchanged in 1.5.3. Important projects should have backups, as with any experimental editor build.
+The port does not add its own `.comp` format changes. Upstream 1.5.5 writes **format version 16** (line styles arrived in 15; new filter adjustment layers in 16), and reads versions 1–16. **Compositor 1.5.3 only accepts versions through 14 and rejects new 1.5.5 saves**, including documents without new features. Keep original projects separately and test using copies.
 
 ## Version labels
 

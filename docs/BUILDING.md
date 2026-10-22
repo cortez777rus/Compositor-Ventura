@@ -7,7 +7,7 @@ This patch-and-build kit obtains the original application from [robbietilton/Com
 1. Open **Actions → Ventura Build → Run workflow** on the candidate branch (or your fork).
 2. The Linux job checks patch/payload synchronization, script syntax, clean patch application, the upstream pin and source compatibility invariants.
 3. The Mac job selects Xcode 26.6 on `macos-26`, applies the same embedded patch and downloads the segmentation model from Apple with a SHA-256 check.
-4. It runs seventeen selected test suites, then builds Release for arm64 and x86_64. It checks Mach-O minimum OS, the shortcut protocol-conformance imports, the ad-hoc signature and brief startup of runnable slices on the build host.
+4. It runs twenty selected test suites, then builds Release for arm64 and x86_64. It checks Mach-O minimum OS, the shortcut protocol-conformance imports, the ad-hoc signature and brief startup of runnable slices on the build host.
 5. After success, download **Compositor-1.5.5-Ventura-candidate-universal**. The artifact contains the app ZIP and its checksum; diagnostics are separate.
 
 The workflow runs for pull requests and pushes changing the workflow, patches or scripts, as well as manual dispatch. No release is published automatically. Artifacts expire after 30 days (app) or 14 days (diagnostics). A successful modern-Mac job is not a Ventura runtime test, and Rosetta is not a native Apple Silicon Ventura check.

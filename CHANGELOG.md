@@ -9,7 +9,7 @@ Upstream application releases and Ventura packaging revisions are distinct. The 
 - Resolve Xcode version/target, editor-state and export conflicts; keep the character-based shortcut crash fix alongside non-Latin layout support.
 - Convert the new PenInput state to Combine; publish line style/cap and artboard tab-name changes, with observation regression tests.
 - Keep the readable and embedded CI patches synchronized; validate clean patch application on Linux before Mac builds.
-- Expand selected Mac tests from eight to seventeen suites; continue checking both Release architectures, minimum OS, signing and startup on the build host.
+- Expand selected Mac tests from eight to twenty suites; continue checking both Release architectures, minimum OS, signing and startup on the build host.
 
 Validation status is tracked in [TESTING.md](docs/TESTING.md). This entry is not a release or a Ventura runtime compatibility claim. Native Apple Silicon on Ventura is unconfirmed.
 

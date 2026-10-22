@@ -1,9 +1,9 @@
 diff --git a/.github/workflows/ventura-build.yml b/.github/workflows/ventura-build.yml
 new file mode 100644
-index 0000000..d9e7ace
+index 0000000..982368e
 --- /dev/null
 +++ b/.github/workflows/ventura-build.yml
-@@ -0,0 +1,88 @@
+@@ -0,0 +1,91 @@
 +name: Ventura Build
 +
 +on:
@@ -54,6 +54,9 @@ index 0000000..d9e7ace
 +            -only-testing:CompositorTests/PSDArtboardTests \
 +            -only-testing:CompositorTests/PenPressureTests \
 +            -only-testing:CompositorTests/ShapeToolTests \
++            -only-testing:CompositorTests/ProjectTests \
++            -only-testing:CompositorTests/CompositorTests \
++            -only-testing:CompositorTests/FloatingPanelTests \
 +            MACOSX_DEPLOYMENT_TARGET=13.0 ONLY_ACTIVE_ARCH=YES \
 +            CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY=- DEVELOPMENT_TEAM= \
 +            GCC_OPTIMIZATION_LEVEL=s SWIFT_OPTIMIZATION_LEVEL=-O \
