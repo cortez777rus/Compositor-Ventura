@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--check', action='store_true', help='validate without modifying the workflow')
 args = parser.parse_args()
 root = Path(__file__).resolve().parent.parent
-patch = (root / 'patches/ventura-1.5.3.patch').read_bytes()
+patch = (root / 'patches/ventura-1.5.5.patch').read_bytes()
 workflow = root / '.github/workflows/ventura-build.yml'
 text = workflow.read_text()
 payload_pattern = r'          encoded = """\n(.*?)\n          """'

@@ -2,13 +2,21 @@
 
 [Русская версия](README.ru.md) · [Download](https://github.com/cortez777rus/Compositor-Ventura/releases/latest) · [Original Compositor](https://github.com/robbietilton/Compositor)
 
-**An unofficial compatibility port of Compositor 1.5.3 for macOS 13 Ventura, for Intel and Apple Silicon.**
+**An unofficial compatibility port of Compositor for macOS 13 Ventura, targeting Intel and Apple Silicon.**
 
 Compositor is the work of **Robbie Tilton and the upstream contributors**. Its original copyright is **© 2026 Wonder Assembly LLC**. Please visit and support the **[original repository: robbietilton/Compositor](https://github.com/robbietilton/Compositor)** and the [official website](https://robbietilton.com/compositor).
 
 This repository maintains the Ventura compatibility changes and build instructions. It does not claim authorship of Compositor and is not an official release or an endorsement by its original authors. The upstream [MIT license](LICENSE) and copyright notice are preserved.
 
-## Download and install
+## 1.5.5 port candidate
+
+The build kit now targets upstream **v1.5.5**, commit [`b31ea029`](https://github.com/robbietilton/Compositor/commit/b31ea029762ecb782699df971e1412168602a44d), as **Ventura candidate build 51.1**. This is a source update under validation, not a published working release. The latest published Ventura release remains **1.5.3 / 49.2** below. Its test results do not apply to 1.5.5.
+
+**CI passed:** 153 tests (201 executions), universal Release build and startup checks on macOS 26.6.2. Actual 1.5.5 runtime on macOS 13 has not been tested. [Evidence and candidate download](docs/TESTING.md).
+
+The port retains upstream RGB Split, the new adjustment layers, Channel Pack and Photoshop artboards, alongside the 1.5.4 changes. See the [migration review](docs/UPGRADING-1.5.5.md), [build instructions](docs/BUILDING.md) and [current verification status](docs/TESTING.md). **Native Apple Silicon runtime on macOS Ventura remains unconfirmed.**
+
+## Published 1.5.3 release: download and install
 
 Get **Compositor 1.5.3 — Ventura build 49.2** from [Releases](https://github.com/cortez777rus/Compositor-Ventura/releases/latest).
 
@@ -20,7 +28,7 @@ The GitHub-generated **Source code** downloads contain this build kit. For the c
 
 No Xcode or GitHub account is needed to download and run the release. Keep the accompanying [third-party notices](THIRD_PARTY_NOTICES.txt) when redistributing it.
 
-## Compatibility and verification
+## Published 1.5.3 release: compatibility and verification
 
 | Item | Status |
 | --- | --- |
@@ -41,19 +49,20 @@ The Ventura report is an initial-use confirmation, not a complete feature or har
 - **RAW Highlight Recovery is unavailable on Ventura.** Other RAW support depends on the system's decoder.
 - Some interface details use older macOS controls.
 - Official automatic updates are disabled so they cannot replace this build with an incompatible release. Install future Ventura releases manually.
-- The document format has not been changed. Back up important projects before trying an unofficial build.
+- Upstream 1.5.5 saves `.comp` format 16, which 1.5.3 cannot open. The port preserves that behavior; keep original projects separately and test using copies.
 
 Read [compatibility notes](docs/COMPATIBILITY.md) and the [changelog](CHANGELOG.md). The earlier internal build 49 had a startup crash; use **49.2**.
 
 ## Source and builds
 
-This is a **patch-and-build repository**. It keeps a readable [compatibility patch](patches/ventura-1.5.3.patch), the original license, build scripts and documentation. It obtains the original application from the pinned upstream commit rather than presenting that application as a new project.
+This is a **patch-and-build repository**. It keeps a readable [compatibility patch](patches/ventura-1.5.5.patch), the original license, build scripts and documentation. It obtains the original application from the pinned upstream commit rather than presenting that application as a new project.
 
 To prepare the full source:
 
 ```bash
 git clone https://github.com/cortez777rus/Compositor-Ventura.git
 cd Compositor-Ventura
+git switch update/compositor-1.5.5-ventura
 bash scripts/prepare-source.sh
 ```
 

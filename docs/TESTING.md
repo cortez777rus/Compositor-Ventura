@@ -1,10 +1,51 @@
-# Verification of build 49.2
+# Verification status
 
-## Actual Ventura report
+## 1.5.5 / candidate build 51.1
+
+This candidate is based on upstream commit `b31ea029762ecb782699df971e1412168602a44d`. Historical 1.5.3 / 49.2 results below do not validate it.
+
+| Check | Candidate status |
+| --- | --- |
+| Readable patch vs embedded payload SHA-256 | Passed locally on Linux |
+| Apply patch to pristine pinned 1.5.5 source | Passed locally, without rejected hunks |
+| Source-only preparation, pin and observation/target checks | Passed locally on Linux |
+| Xcode compilation and selected tests | **153 logical tests passed**, 0 failed, 0 skipped; 201 executions including parameters, twenty selected suites |
+| Universal Release metadata, signature and build-host startup | Passed for arm64 and x86_64 on macOS 26.6.2; see evidence below |
+| Intel macOS Ventura launch and feature checks | Not performed for 1.5.5 |
+| Native Apple Silicon macOS Ventura | **Unconfirmed** |
+
+CI retains the previous eight suites and adds AdjustmentLayerTests, ChannelPackTests, FilterLayerTests, FilterTests, FontMenuFacesTests, PDFImportTests, PSDArtboardTests, PenPressureTests, ShapeToolTests, ProjectTests, CompositorTests and FloatingPanelTests. Two port regression tests check notifications for line style/cap and changing artboard tab names, including detaching closed tabs. No total pass count is claimed before the run.
+
+### Candidate CI evidence
+
+[Successful final CI run](https://github.com/cortez777rus/Compositor-Ventura/actions/runs/39869925687), implementation commit `ed960a3f2eeb0e98e4f3a9d4ba0117fc8de9a1d3`. Later documentation-only updates do not change the validated patch.
+
+- Build host: macOS **26.6.2**, Apple Silicon; selected Xcode **26.6**. Unit/integration tests ran as arm64.
+- **153 logical tests passed**, zero failed or skipped; **201 executions** including parameters in the exported xcresult summary. Twenty selected suites, not every upstream suite.
+- Release compiled for **arm64 + x86_64**, app version **1.5.5**, build **51.1**.
+- All six embedded Mach-O files have both architectures. The main executable declares minimum macOS **13.0**; embedded Sparkle binaries declare **12.0**.
+- Neither main-executable slice imports the problematic KeyEquivalent/KeyboardShortcut protocol conformances.
+- `codesign --verify --deep --strict` passed with an ad-hoc signature.
+- Both Release processes remained alive for ten seconds on macOS **26.6.2**. The Intel slice ran under Rosetta; this does not emulate Ventura.
+- [Candidate application artifact](https://github.com/cortez777rus/Compositor-Ventura/actions/runs/39869925687/artifacts/12466835225): app ZIP plus `.sha256`; [diagnostics](https://github.com/cortez777rus/Compositor-Ventura/actions/runs/39869925687/artifacts/12465554740): logs, bundle/signature/startup reports and xcresult. Artifact downloads can require login and expire after 30 / 14 days respectively.
+
+Validated readable/embedded patch SHA-256:
+
+```text
+a5d18d851e31d215f17dd274b2a16afa095e84c3779523502ba2bd0d4e6a2c96
+```
+
+### Remaining Ventura checks
+
+Before promoting the candidate, repeat launch and feature checks on actual Ventura: create/paint/Undo/Redo, multiple tabs, save/reopen a `.comp` copy, RGB Split Linear/Radial and Split to Layers, all three new adjustment layers, PNG Channel Pack including RGB beneath alpha=0, PSD artboards and ordinary PSD import, PDF pages, font search, Russian-layout shortcuts and Save/Open panel clipboard operations. Check RAW and foreground selection for retained fallbacks. Pen UI and pressure additionally need a physical tablet. Record CPU/GPU and macOS version for each result.
+
+## Historical 1.5.3 / build 49.2
+
+### Actual Ventura report
 
 On **18 October 2026**, the maintainer confirmed that build **49.2 opened and worked on Intel macOS 13.7.8 (22H730)** after the startup fix. This is a report of successful launch and initial use, not an exhaustive feature test. Native Apple Silicon on Ventura has not yet been confirmed.
 
-## Automated evidence
+### Automated evidence
 
 The published binary comes from [successful build #8](https://github.com/cortez777rus/Compositor-Ventura/actions/runs/39140583803), workflow commit `25eeefc0f8eba9b08107a652faf1da5c8fa278d9`.
 
@@ -26,7 +67,7 @@ ca3d92e248d58631951999903dd28c462fa8f08b79a5e5b5b299686e7187de79
 
 The full source release asset includes build-time logs and validation reports. Those reports predate the later Ventura confirmation above. GitHub Actions diagnostics have limited retention; the release source archive keeps the text evidence.
 
-## Useful further checks
+### Useful further checks
 
 Reports of native Apple Silicon on Ventura and additional Intel/GPU configurations are welcome. Useful workflows include creating a canvas, painting, Undo/Redo, multiple tabs, saving/reopening a copy of a `.comp` document, PNG/JPEG export, Camera Raw and automatic selections.
 
