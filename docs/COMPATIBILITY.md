@@ -1,6 +1,6 @@
 # Compatibility notes
 
-Target: macOS 13.0 or later, Intel and Apple Silicon. The current source candidate is 1.5.5 / 51.1; its build and runtime evidence is tracked separately in [TESTING.md](TESTING.md). The initial Intel macOS 13.7.8 (22H730) runtime confirmation applies only to the published 1.5.3 / 49.2 release. Native Apple Silicon on Ventura has not been confirmed for either version.
+Target: macOS 13.0 or later, Intel and Apple Silicon. The current release is 1.5.5 / 51.1. Launch and initial use on Intel macOS 13.7.8 (22H730) were confirmed on 24 October 2026. This is not exhaustive feature coverage. Build and runtime evidence is tracked in [TESTING.md](TESTING.md); native Apple Silicon on Ventura remains unconfirmed.
 
 ## Changes for Ventura
 
@@ -23,8 +23,9 @@ The port does not add its own `.comp` format changes. Upstream 1.5.5 writes **fo
 
 ## Version labels
 
-- **1.5.5 / 51.1:** current upstream version / experimental Ventura build; not a published release.
+- **1.5.5 / 51.1:** current upstream version / Ventura build.
 - **1.5.3 / 49.2:** previously verified upstream version / repaired Ventura build.
-- **v1.5.3-ventura.2:** latest published port release tag.
+- **v1.5.5-ventura.1:** current port release tag.
+- **v1.5.3-ventura.2:** previous port release tag.
 
 Use this repository's Releases for later port updates. The original application's download and Homebrew package follow upstream requirements and may not run on Ventura.

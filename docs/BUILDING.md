@@ -1,10 +1,10 @@
 # Building the Ventura port
 
-This patch-and-build kit obtains the original application from [robbietilton/Compositor](https://github.com/robbietilton/Compositor), pinned to **v1.5.5**, commit `b31ea029762ecb782699df971e1412168602a44d`. The application version is **1.5.5**, candidate build **51.1**. Source preparation does not establish compilation or macOS 13 runtime compatibility; [verification status](TESTING.md) is separate.
+This patch-and-build kit obtains the original application from [robbietilton/Compositor](https://github.com/robbietilton/Compositor), pinned to **v1.5.5**, commit `b31ea029762ecb782699df971e1412168602a44d`. The application version is **1.5.5**, build **51.1**. Source preparation does not establish compilation or macOS 13 runtime compatibility; [verification status](TESTING.md) is separate.
 
 ## GitHub Actions
 
-1. Open **Actions → Ventura Build → Run workflow** on the candidate branch (or your fork).
+1. Open **Actions → Ventura Build → Run workflow** on main (or your fork).
 2. The Linux job checks patch/payload synchronization, script syntax, clean patch application, the upstream pin and source compatibility invariants.
 3. The Mac job selects Xcode 26.6 on `macos-26`, applies the same embedded patch and downloads the segmentation model from Apple with a SHA-256 check.
 4. It runs twenty selected test suites, then builds Release for arm64 and x86_64. It checks Mach-O minimum OS, the shortcut protocol-conformance imports, the ad-hoc signature and brief startup of runnable slices on the build host.
@@ -19,8 +19,6 @@ Requirements: Git, Python 3 and curl. Preparation can run on macOS or Linux; com
 ```bash
 git clone https://github.com/cortez777rus/Compositor-Ventura.git
 cd Compositor-Ventura
-# Select the candidate branch if it has not been merged into main.
-git switch update/compositor-1.5.5-ventura
 bash scripts/prepare-source.sh
 ```
 
@@ -49,7 +47,7 @@ bash scripts/build-ventura.sh
 
 Output is in `dist/ventura/`. This script builds and validates Release; selected unit/integration suites are additionally run by the workflow. See its `xcodebuild test` command to reproduce them locally. Preserve test/build logs and report the actual host OS and architectures tested.
 
-The separate full-source asset of the published **1.5.3** release remains a historical build tree. GitHub-generated source archives contain this kit, not the prepared Xcode project. A new 1.5.5 release/source asset has not been published by this change.
+The separate **Compositor-1.5.5-Ventura-source.zip** release asset contains the complete prepared Xcode project, segmentation model, build kit and CI text evidence. GitHub-generated source archives contain this kit, not the prepared Xcode project. The published **1.5.3** full-source asset remains a historical build tree.
 
 ## Maintain the patch
 

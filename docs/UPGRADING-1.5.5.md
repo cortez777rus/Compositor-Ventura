@@ -1,6 +1,6 @@
 # Review: upstream 1.5.3 → 1.5.5 on Ventura
 
-This is an unreleased source candidate, **1.5.5 / 51.1**. A deployment target of 13.0 and successful modern-Mac compilation do not establish runtime support on Ventura. Native Apple Silicon on Ventura remains unconfirmed. See [TESTING.md](TESTING.md) for evidence and remaining checks.
+The port is published as **v1.5.5-ventura.1 / build 51.1** after CI passed and the maintainer confirmed launch and initial use on Intel macOS 13.7.8 (22H730) on 24 October 2026. This is not exhaustive feature coverage. Native Apple Silicon on Ventura remains unconfirmed. See [TESTING.md](TESTING.md) for evidence and remaining checks.
 
 ## Reproducible bases
 
@@ -10,7 +10,7 @@ This is an unreleased source candidate, **1.5.5 / 51.1**. A deployment target of
 - Build-kit base reviewed: `012567dbcd7b0603ac9fb954d1d34cc9eea60a61`.
 - Upstream comparison: **38 commits, 56 changed files**; **19 files overlap** the previous compatibility patch.
 
-The application is obtained from the exact upstream base and patched, preserving upstream credit and licenses. No new release, tag, automatic update feed or change to the existing published binary is part of this update.
+The application is obtained from the exact upstream base and patched, preserving upstream credit and licenses. The new port release uses a separate tag and the exact validated 51.1 application ZIP. The historical 1.5.3 release is preserved; no upstream automatic update feed is enabled.
 
 ## Conflicts and overlapping files
 
@@ -59,7 +59,7 @@ New `ChannelPack.swift`, `MetalDispersion.swift`, `LatinKeys.swift` and `FontLis
 
 On Linux, the new readable and embedded patches matched; the new patch applied to pristine pinned 1.5.5 without rejections; the prepared-source checks passed; the source-only script ran to completion using a local upstream mirror at the pinned tag. The local mirror avoids treating network or model availability as source validation. Script syntax, Python compilation and workflow YAML parsing were also checked.
 
-Linux has no Xcode, AppKit, Metal runtime or Ventura host. The final [Mac CI run](https://github.com/cortez777rus/Compositor-Ventura/actions/runs/39869925687) passed 153 logical tests / 201 executions across twenty suites and built/validated both Release slices. Detailed evidence is in [TESTING.md](TESTING.md). Runtime checks on Intel Ventura and separately native Apple Silicon Ventura remain required; the old 49.2 results are not evidence for 1.5.5.
+Linux has no Xcode, AppKit, Metal runtime or Ventura host. The final [Mac CI run](https://github.com/cortez777rus/Compositor-Ventura/actions/runs/39869925687) passed 153 logical tests / 201 executions across twenty suites and built/validated both Release slices. Detailed evidence is in [TESTING.md](TESTING.md). The maintainer subsequently confirmed launch and initial use on Intel Ventura on 24 October 2026. Individual feature checks and native Apple Silicon Ventura remain unconfirmed; the old 49.2 results are not evidence for 1.5.5.
 
 ## Document compatibility
 

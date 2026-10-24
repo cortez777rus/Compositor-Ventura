@@ -1,22 +1,22 @@
 # Verification status
 
-## 1.5.5 / candidate build 51.1
+## 1.5.5 / build 51.1
 
-This candidate is based on upstream commit `b31ea029762ecb782699df971e1412168602a44d`. Historical 1.5.3 / 49.2 results below do not validate it.
+This release is based on upstream commit `b31ea029762ecb782699df971e1412168602a44d`. Historical 1.5.3 / 49.2 results below do not validate it.
 
-| Check | Candidate status |
+| Check | Status |
 | --- | --- |
 | Readable patch vs embedded payload SHA-256 | Passed locally on Linux |
 | Apply patch to pristine pinned 1.5.5 source | Passed locally, without rejected hunks |
 | Source-only preparation, pin and observation/target checks | Passed locally on Linux |
 | Xcode compilation and selected tests | **153 logical tests passed**, 0 failed, 0 skipped; 201 executions including parameters, twenty selected suites |
 | Universal Release metadata, signature and build-host startup | Passed for arm64 and x86_64 on macOS 26.6.2; see evidence below |
-| Intel macOS Ventura launch and feature checks | Not performed for 1.5.5 |
+| Intel macOS Ventura launch and initial use | **Confirmed by the maintainer on 24 October 2026, Intel macOS 13.7.8 (22H730)**; feature checklist below remains incomplete |
 | Native Apple Silicon macOS Ventura | **Unconfirmed** |
 
-CI retains the previous eight suites and adds AdjustmentLayerTests, ChannelPackTests, FilterLayerTests, FilterTests, FontMenuFacesTests, PDFImportTests, PSDArtboardTests, PenPressureTests, ShapeToolTests, ProjectTests, CompositorTests and FloatingPanelTests. Two port regression tests check notifications for line style/cap and changing artboard tab names, including detaching closed tabs. No total pass count is claimed before the run.
+CI retains the previous eight suites and adds AdjustmentLayerTests, ChannelPackTests, FilterLayerTests, FilterTests, FontMenuFacesTests, PDFImportTests, PSDArtboardTests, PenPressureTests, ShapeToolTests, ProjectTests, CompositorTests and FloatingPanelTests. Two port regression tests check notifications for line style/cap and changing artboard tab names, including detaching closed tabs.
 
-### Candidate CI evidence
+### CI evidence
 
 [Successful final CI run](https://github.com/cortez777rus/Compositor-Ventura/actions/runs/39869925687), implementation commit `ed960a3f2eeb0e98e4f3a9d4ba0117fc8de9a1d3`. Later documentation-only updates do not change the validated patch.
 
@@ -35,11 +35,27 @@ Validated readable/embedded patch SHA-256:
 a5d18d851e31d215f17dd274b2a16afa095e84c3779523502ba2bd0d4e6a2c96
 ```
 
+Application ZIP SHA-256 (unchanged from the tested CI artifact):
+
+```text
+372a2e3479127ea97991ea45cb22ffed31ccc2bcd3ee6a4bcc4820c403d0d09d
+```
+
+### Actual Ventura report
+
+On **24 October 2026**, the maintainer reported that the 1.5.5 / 51.1 candidate opened and worked on their **Intel Mac with macOS 13.7.8 (22H730)** and authorized publication. The release reuses that exact CI application ZIP, without rebuilding or changing its contents. This is a launch and initial-use report; no individual new-feature checklist result was supplied. Native Apple Silicon on Ventura remains unconfirmed.
+
 ### Remaining Ventura checks
 
-Before promoting the candidate, repeat launch and feature checks on actual Ventura: create/paint/Undo/Redo, multiple tabs, save/reopen a `.comp` copy, RGB Split Linear/Radial and Split to Layers, all three new adjustment layers, PNG Channel Pack including RGB beneath alpha=0, PSD artboards and ordinary PSD import, PDF pages, font search, Russian-layout shortcuts and Save/Open panel clipboard operations. Check RAW and foreground selection for retained fallbacks. Pen UI and pressure additionally need a physical tablet. Record CPU/GPU and macOS version for each result.
+Additional feature checks on actual Ventura remain useful: create/paint/Undo/Redo, multiple tabs, save/reopen a `.comp` copy, RGB Split Linear/Radial and Split to Layers, all three new adjustment layers, PNG Channel Pack including RGB beneath alpha=0, PSD artboards and ordinary PSD import, PDF pages, font search, Russian-layout shortcuts and Save/Open panel clipboard operations. Check RAW and foreground selection for retained fallbacks. Pen UI and pressure additionally need a physical tablet. Record CPU/GPU and macOS version for each result.
 
 ## Historical 1.5.3 / build 49.2
+
+Application ZIP SHA-256 (unchanged from the tested CI artifact):
+
+```text
+372a2e3479127ea97991ea45cb22ffed31ccc2bcd3ee6a4bcc4820c403d0d09d
+```
 
 ### Actual Ventura report
 

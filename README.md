@@ -8,40 +8,40 @@ Compositor is the work of **Robbie Tilton and the upstream contributors**. Its o
 
 This repository maintains the Ventura compatibility changes and build instructions. It does not claim authorship of Compositor and is not an official release or an endorsement by its original authors. The upstream [MIT license](LICENSE) and copyright notice are preserved.
 
-## 1.5.5 port candidate
+## Compositor 1.5.5 — Ventura build 51.1
 
-The build kit now targets upstream **v1.5.5**, commit [`b31ea029`](https://github.com/robbietilton/Compositor/commit/b31ea029762ecb782699df971e1412168602a44d), as **Ventura candidate build 51.1**. This is a source update under validation, not a published working release. The latest published Ventura release remains **1.5.3 / 49.2** below. Its test results do not apply to 1.5.5.
+Based on upstream **v1.5.5**, commit [`b31ea029`](https://github.com/robbietilton/Compositor/commit/b31ea029762ecb782699df971e1412168602a44d). This update retains RGB Split, the new adjustment layers, Channel Pack and Photoshop artboards, alongside the 1.5.4 changes. See the [migration review](docs/UPGRADING-1.5.5.md).
 
-**CI passed:** 153 tests (201 executions), universal Release build and startup checks on macOS 26.6.2. Actual 1.5.5 runtime on macOS 13 has not been tested. [Evidence and candidate download](docs/TESTING.md).
+**On 24 October 2026, the maintainer confirmed that build 51.1 opened and worked in initial use on Intel macOS 13.7.8 (22H730).** This is not an exhaustive feature test. **Native Apple Silicon on macOS Ventura remains unconfirmed.**
 
-The port retains upstream RGB Split, the new adjustment layers, Channel Pack and Photoshop artboards, alongside the 1.5.4 changes. See the [migration review](docs/UPGRADING-1.5.5.md), [build instructions](docs/BUILDING.md) and [current verification status](docs/TESTING.md). **Native Apple Silicon runtime on macOS Ventura remains unconfirmed.**
+**Project compatibility:** 1.5.5 saves `.comp` format **16**, which 1.5.3 cannot open, even without new features. Keep original projects separately before saving them in 1.5.5.
 
-## Published 1.5.3 release: download and install
+## Download and install
 
-Get **Compositor 1.5.3 — Ventura build 49.2** from [Releases](https://github.com/cortez777rus/Compositor-Ventura/releases/latest).
+Get **Compositor 1.5.5 — Ventura build 51.1** from [Releases](https://github.com/cortez777rus/Compositor-Ventura/releases/tag/v1.5.5-ventura.1).
 
-1. Download **`Compositor-1.5.3-Ventura-universal.zip`** under **Assets**.
+1. Download **`Compositor-1.5.5-Ventura-universal.zip`** under **Assets**.
 2. Quit any older copy, unzip the download, and move `Compositor.app` to **Applications**, replacing the old copy if needed.
 3. Open the installed copy. This build is ad-hoc signed and **not notarized by Apple**. If macOS blocks it, use **System Settings → Privacy & Security → Open Anyway** for this app, if offered.
 
-The GitHub-generated **Source code** downloads contain this build kit. For the complete patched Xcode project, download the separately attached **`Compositor-1.5.3-Ventura-source.zip`**.
+The GitHub-generated **Source code** downloads contain this build kit. For the complete patched Xcode project, download the separately attached **`Compositor-1.5.5-Ventura-source.zip`**.
 
-No Xcode or GitHub account is needed to download and run the release. Keep the accompanying [third-party notices](THIRD_PARTY_NOTICES.txt) when redistributing it.
+No Xcode or GitHub account is needed to download and run the release. Keep the accompanying [third-party notices](THIRD_PARTY_NOTICES.txt) when redistributing it. The previous [1.5.3 / 49.2 release](https://github.com/cortez777rus/Compositor-Ventura/releases/tag/v1.5.3-ventura.2) remains available.
 
-## Published 1.5.3 release: compatibility and verification
+## Compatibility and verification
 
 | Item | Status |
 | --- | --- |
-| Based on | Official Compositor **v1.5.3**, commit [`554104c`](https://github.com/robbietilton/Compositor/commit/554104cf1c2de844c1acbd60b4f7b422bd6ce7bd) |
-| App build | **49.2** |
+| Based on | Official Compositor **v1.5.5**, commit [`b31ea029`](https://github.com/robbietilton/Compositor/commit/b31ea029762ecb782699df971e1412168602a44d) |
+| App build | **51.1** |
 | Minimum deployment target | macOS **13.0** |
 | Architectures | Universal: **Intel x86_64 + Apple Silicon arm64** |
-| Ventura runtime report | Launch and initial use confirmed by the maintainer on **Intel, macOS 13.7.8 (22H730)** on 18 October 2026 |
-| Automated tests | **71 passed**, 0 failed; 104 cases including parameterized runs |
+| Ventura runtime report | Launch and initial use confirmed by the maintainer on **Intel, macOS 13.7.8 (22H730)** on 24 October 2026 |
+| Automated tests | **153 passed**, 0 failed or skipped; 201 executions including parameters across twenty selected suites |
 | Release startup checks | Both slices passed on macOS 26.6.2; Intel ran through Rosetta |
 | Signing | Ad-hoc; no Developer ID certificate or Apple notarization |
 
-The Ventura report is an initial-use confirmation, not a complete feature or hardware certification. Native Apple Silicon on Ventura has not yet been reported as tested. Details: [test evidence](docs/TESTING.md).
+The release application is the exact ZIP from the successful [CI run](https://github.com/cortez777rus/Compositor-Ventura/actions/runs/39869925687), also used for the Ventura confirmation. Detailed evidence and remaining feature checks: [TESTING.md](docs/TESTING.md).
 
 ## Known differences
 
@@ -51,7 +51,7 @@ The Ventura report is an initial-use confirmation, not a complete feature or har
 - Official automatic updates are disabled so they cannot replace this build with an incompatible release. Install future Ventura releases manually.
 - Upstream 1.5.5 saves `.comp` format 16, which 1.5.3 cannot open. The port preserves that behavior; keep original projects separately and test using copies.
 
-Read [compatibility notes](docs/COMPATIBILITY.md) and the [changelog](CHANGELOG.md). The earlier internal build 49 had a startup crash; use **49.2**.
+Read [compatibility notes](docs/COMPATIBILITY.md) and the [changelog](CHANGELOG.md). The earlier internal build 49 had a startup crash; use the current release or historical **49.2**.
 
 ## Source and builds
 
@@ -62,7 +62,6 @@ To prepare the full source:
 ```bash
 git clone https://github.com/cortez777rus/Compositor-Ventura.git
 cd Compositor-Ventura
-git switch update/compositor-1.5.5-ventura
 bash scripts/prepare-source.sh
 ```
 
