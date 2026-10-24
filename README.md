@@ -2,38 +2,46 @@
 
 [Русская версия](README.ru.md) · [Download](https://github.com/cortez777rus/Compositor-Ventura/releases/latest) · [Original Compositor](https://github.com/robbietilton/Compositor)
 
-**An unofficial compatibility port of Compositor 1.5.3 for macOS 13 Ventura, for Intel and Apple Silicon.**
+**An unofficial compatibility port of Compositor for macOS 13 Ventura, targeting Intel and Apple Silicon.**
 
 Compositor is the work of **Robbie Tilton and the upstream contributors**. Its original copyright is **© 2026 Wonder Assembly LLC**. Please visit and support the **[original repository: robbietilton/Compositor](https://github.com/robbietilton/Compositor)** and the [official website](https://robbietilton.com/compositor).
 
 This repository maintains the Ventura compatibility changes and build instructions. It does not claim authorship of Compositor and is not an official release or an endorsement by its original authors. The upstream [MIT license](LICENSE) and copyright notice are preserved.
 
+## Compositor 1.5.5 — Ventura build 51.1
+
+Based on upstream **v1.5.5**, commit [`b31ea029`](https://github.com/robbietilton/Compositor/commit/b31ea029762ecb782699df971e1412168602a44d). This update retains RGB Split, the new adjustment layers, Channel Pack and Photoshop artboards, alongside the 1.5.4 changes. See the [migration review](docs/UPGRADING-1.5.5.md).
+
+**On 24 October 2026, the maintainer confirmed that build 51.1 opened and worked in initial use on Intel macOS 13.7.8 (22H730).** This is not an exhaustive feature test. **Native Apple Silicon on macOS Ventura remains unconfirmed.**
+
+**Project compatibility:** 1.5.5 saves `.comp` format **16**, which 1.5.3 cannot open, even without new features. Keep original projects separately before saving them in 1.5.5.
+
 ## Download and install
 
-Get **Compositor 1.5.3 — Ventura build 49.2** from [Releases](https://github.com/cortez777rus/Compositor-Ventura/releases/latest).
+Get **Compositor 1.5.5 — Ventura build 51.1** from [Releases](https://github.com/cortez777rus/Compositor-Ventura/releases/tag/v1.5.5-ventura.1).
 
-1. Download **`Compositor-1.5.3-Ventura-universal.zip`** under **Assets**.
+1. Download **`Compositor-1.5.5-Ventura-universal.zip`** under **Assets**.
 2. Quit any older copy, unzip the download, and move `Compositor.app` to **Applications**, replacing the old copy if needed.
 3. Open the installed copy. This build is ad-hoc signed and **not notarized by Apple**. If macOS blocks it, use **System Settings → Privacy & Security → Open Anyway** for this app, if offered.
 
-The GitHub-generated **Source code** downloads contain this build kit. For the complete patched Xcode project, download the separately attached **`Compositor-1.5.3-Ventura-source.zip`**.
+The GitHub-generated **Source code** downloads contain this build kit. For the complete patched Xcode project, download the separately attached **`Compositor-1.5.5-Ventura-source.zip`**.
 
-No Xcode or GitHub account is needed to download and run the release. Keep the accompanying [third-party notices](THIRD_PARTY_NOTICES.txt) when redistributing it.
+No Xcode or GitHub account is needed to download and run the release. Keep the accompanying [third-party notices](THIRD_PARTY_NOTICES.txt) when redistributing it. The previous [1.5.3 / 49.2 release](https://github.com/cortez777rus/Compositor-Ventura/releases/tag/v1.5.3-ventura.2) remains available.
 
 ## Compatibility and verification
 
 | Item | Status |
 | --- | --- |
-| Based on | Official Compositor **v1.5.3**, commit [`554104c`](https://github.com/robbietilton/Compositor/commit/554104cf1c2de844c1acbd60b4f7b422bd6ce7bd) |
-| App build | **49.2** |
+| Based on | Official Compositor **v1.5.5**, commit [`b31ea029`](https://github.com/robbietilton/Compositor/commit/b31ea029762ecb782699df971e1412168602a44d) |
+| App build | **51.1** |
 | Minimum deployment target | macOS **13.0** |
 | Architectures | Universal: **Intel x86_64 + Apple Silicon arm64** |
-| Ventura runtime report | Launch and initial use confirmed by the maintainer on **Intel, macOS 13.7.8 (22H730)** on 18 October 2026 |
-| Automated tests | **71 passed**, 0 failed; 104 cases including parameterized runs |
+| Ventura runtime report | Launch and initial use confirmed by the maintainer on **Intel, macOS 13.7.8 (22H730)** on 24 October 2026 |
+| Automated tests | **153 passed**, 0 failed or skipped; 201 executions including parameters across twenty selected suites |
 | Release startup checks | Both slices passed on macOS 26.6.2; Intel ran through Rosetta |
 | Signing | Ad-hoc; no Developer ID certificate or Apple notarization |
 
-The Ventura report is an initial-use confirmation, not a complete feature or hardware certification. Native Apple Silicon on Ventura has not yet been reported as tested. Details: [test evidence](docs/TESTING.md).
+The release application is the exact ZIP from the successful [CI run](https://github.com/cortez777rus/Compositor-Ventura/actions/runs/39869925687), also used for the Ventura confirmation. Detailed evidence and remaining feature checks: [TESTING.md](docs/TESTING.md).
 
 ## Known differences
 
@@ -41,13 +49,13 @@ The Ventura report is an initial-use confirmation, not a complete feature or har
 - **RAW Highlight Recovery is unavailable on Ventura.** Other RAW support depends on the system's decoder.
 - Some interface details use older macOS controls.
 - Official automatic updates are disabled so they cannot replace this build with an incompatible release. Install future Ventura releases manually.
-- The document format has not been changed. Back up important projects before trying an unofficial build.
+- Upstream 1.5.5 saves `.comp` format 16, which 1.5.3 cannot open. The port preserves that behavior; keep original projects separately and test using copies.
 
-Read [compatibility notes](docs/COMPATIBILITY.md) and the [changelog](CHANGELOG.md). The earlier internal build 49 had a startup crash; use **49.2**.
+Read [compatibility notes](docs/COMPATIBILITY.md) and the [changelog](CHANGELOG.md). The earlier internal build 49 had a startup crash; use the current release or historical **49.2**.
 
 ## Source and builds
 
-This is a **patch-and-build repository**. It keeps a readable [compatibility patch](patches/ventura-1.5.3.patch), the original license, build scripts and documentation. It obtains the original application from the pinned upstream commit rather than presenting that application as a new project.
+This is a **patch-and-build repository**. It keeps a readable [compatibility patch](patches/ventura-1.5.5.patch), the original license, build scripts and documentation. It obtains the original application from the pinned upstream commit rather than presenting that application as a new project.
 
 To prepare the full source:
 

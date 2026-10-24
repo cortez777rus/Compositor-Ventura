@@ -5,12 +5,14 @@
 **Compositor is developed by Robbie Tilton and the contributors to [robbietilton/Compositor](https://github.com/robbietilton/Compositor).**
 
 - Official website: <https://robbietilton.com/compositor>
-- Upstream release used: [v1.5.3](https://github.com/robbietilton/Compositor/releases/tag/v1.5.3)
-- Exact base commit: `554104cf1c2de844c1acbd60b4f7b422bd6ce7bd`
+- Upstream release used by the current build kit: [v1.5.5](https://github.com/robbietilton/Compositor/releases/tag/v1.5.5)
+- Exact base commit: `b31ea029762ecb782699df971e1412168602a44d`
 - Original copyright: **Copyright (c) 2026 Wonder Assembly LLC**
 - License: [MIT, retained without replacing the original copyright](LICENSE)
 
 The Ventura repository is an independent adaptation. Its owner does not claim to have created Compositor, and the upstream authors have not endorsed this port. Names and links identify the source of the application.
+
+The published 1.5.3 / 49.2 release used commit `554104cf1c2de844c1acbd60b4f7b422bd6ce7bd`. The 1.5.5 source update does not transfer that release’s runtime validation to the new candidate.
 
 ## Compatibility work
 
